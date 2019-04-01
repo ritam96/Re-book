@@ -1,12 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
 
-class User(models.Model):
-    name = models.CharField(max_length=70)
-    email = models.EmailField()
-    password = models.CharField(max_length=120)
+class User(AbstractUser):
     address = models.CharField(max_length=200)
     photo = models.ImageField()
 
@@ -22,7 +20,7 @@ class Publisher(models.Model):
 class Book(models.Model):
     ISBN = models.CharField(max_length=20, primary_key=True)
     title = models.CharField(max_length=100)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     year = models.IntegerField()
     cover = models.ImageField()
