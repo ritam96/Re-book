@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46032e85-3c19-43b9-98e7-6fd2572a775e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/rebook/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rebook/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/models.py" afterDir="false" />
-    </list>
+    <list default="true" id="46032e85-3c19-43b9-98e7-6fd2572a775e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,16 +184,15 @@
       <option name="presentableId" value="Default" />
       <updated>1552924170865</updated>
       <workItem from="1552924177778" duration="436000" />
-      <workItem from="1552993132233" duration="4540000" />
+      <workItem from="1552993132233" duration="4659000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4976000" />
+    <option name="totallyTimeSpent" value="5095000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1533" height="875" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1721587" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
