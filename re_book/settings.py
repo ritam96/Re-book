@@ -122,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'rebook.User'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
