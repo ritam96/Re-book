@@ -1,0 +1,43 @@
+.navbar {
+    height: 10vh;
+    background-color: #323232 !important;
+}
+
+.btn {
+    color: #F6E648;
+}
+
+.nav-item {
+    color: white !important;
+    font-size: 1.3rem
+}
+
+.nav-item:hover, .nav-item:active {
+    font-size: 1.35rem;
+    color: #FFF698 !important
+} 
+
+.btn:hover, .btn:active {
+    background-color: #FFF698;
+    color: black
+}
+
+.btn-outline-warning {
+    border-color: #F6E648;
+}
+
+.btn-outline-warning:hover {
+    border-color: #F6E648;
+
+}
+
+.navbar-brand {
+    height:9vh;
+    margin-top: 0px;
+    border-top: 0px;
+    padding-top: 0px;
+}
+
+.logo {
+    height: 9vh;
+}
