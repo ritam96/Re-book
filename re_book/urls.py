@@ -19,7 +19,10 @@ from rebook import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('logout/', views.logout),
+    path('', views.rebook, name='rebook'),
     path('login/', views.login),
-    path('', views.rebook, name='rebook')
+    path('loginWithCredentials', views.loginWithCredentials),
+    path('register', views.register),
+    path('createAccount', views.createAccount)
 ]

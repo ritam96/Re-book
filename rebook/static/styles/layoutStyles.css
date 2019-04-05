@@ -9,7 +9,10 @@
 
 .nav-item {
     color: white !important;
-    font-size: 1.3rem
+    font-size: 1.3rem;
+    width:8vw;
+    text-align: center;
+    line-height: 7vh
 }
 
 .nav-item:hover, .nav-item:active {
@@ -17,25 +20,51 @@
     color: #FFF698 !important
 } 
 
-.btn:hover, .btn:active {
-    background-color: #FFF698;
-    color: black
-}
-
 .btn-outline-warning {
     border-color: #F6E648;
 }
 
-.btn-outline-warning:hover {
+.btn-outline-warning:hover, .btn-outline-warning:active {
     border-color: #F6E648;
+    background-color: #FFF698;
+    color: black
+}
 
+.loginLabels {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1D1500;
+    padding-left: 5px
 }
 
 .navbar-brand {
+    width:14vw;
     height:9vh;
     margin-top: 0px;
     border-top: 0px;
     padding-top: 0px;
+}
+
+.modal-body {
+    background-color: #E1A000 !important;
+}
+
+.modal-header {
+    background-color: #323232 !important;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-color: black
+}
+
+.form-actions {
+    margin: 0;
+    background-color: transparent;
+    text-align: center;
+}
+
+.btn-outline-dark {
+    width: 50%;
+    color: white
 }
 
 .logo {
