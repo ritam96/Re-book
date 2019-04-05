@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     address = models.CharField(max_length=200)
     photo = models.ImageField()
+    hasNotifications = models.BooleanField(default=False)
 
 
 class Author(models.Model):

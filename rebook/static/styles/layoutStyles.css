@@ -9,7 +9,10 @@
 
 .nav-item {
     color: white !important;
-    font-size: 1.3rem
+    font-size: 1.3rem;
+    width:8vw;
+    text-align: center;
+    line-height: 7vh
 }
 
 .nav-item:hover, .nav-item:active {
@@ -32,6 +35,7 @@
 }
 
 .navbar-brand {
+    width:14vw;
     height:9vh;
     margin-top: 0px;
     border-top: 0px;

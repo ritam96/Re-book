@@ -19,5 +19,4 @@ from rebook import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.rebook, name='rebook')
-]
+    path('', views.rebook, name='rebook')]
