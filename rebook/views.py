@@ -34,7 +34,8 @@ def createAccount(request):
     user = User.objects.create_user(username=request.POST['username'],
                                     email=request.POST['email'],
                                     password=request.POST['password'],
-                                    address=request.POST['address'])
+                                    address=request.POST['address'],
+                                    photo = request.POST['photo'])
     if 'photo' in request.POST.keys():
         user.photo = request.POST['photo']
 
