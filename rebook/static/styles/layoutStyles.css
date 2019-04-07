@@ -110,3 +110,22 @@ body{
 .logo {
     height: 9vh;
 }
+
+
+.nav.nav-tabs {
+    background-color: gray;
+    height: 7vh;
+}
+.nav.nav-tabs li {
+    justify-content: center;
+    height: 100%;
+    padding: 10px 20px 0 20px; 
+}
+
+.nav.nav-tabs li:hover {
+    background-color: #323232;
+}
+
+.nav.nav-tabs a {
+    color: white;
+}

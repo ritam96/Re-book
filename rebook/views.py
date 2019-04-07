@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User, Book, BookInstance, Trade
+from rebook.models import User, Book, BookInstance, Trade, Proposal
 from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
@@ -64,7 +64,10 @@ def createAccount(request):
 def proposals(request):
     user = User.objects.get(username=request.user)
     my_proposals = Proposal.objects.filter(user2=user.id)
-    return render(request, 'proposals.html', { 'my_proposals': my_proposals })
+    offers = Proposal.objects.raw('''SELECT * FROM rebook_proposal 
+        JOIN rebook_bookinstance ON bookinstance_id=rebook_bookinstance.id 
+        JOIN rebook_user WHERE User_id=''' + str(user.id))
+    return render(request, 'proposals.html', { 'my_proposals': my_proposals, 'offers': offers })
 
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.session['ISBN'])
