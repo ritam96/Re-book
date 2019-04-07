@@ -63,7 +63,21 @@ def createAccount(request):
 
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.GET['bookISBN'])
-    return render(request, 'bookDetails.html', {'book': book})
+    rating = None
+
+    # Calculate average rating
+    cursor = connection.cursor()
+    cursor.execute("SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
+    result = cursor.fetchall()
+    if result[0][0] != None:
+        rating = result[0][0] 
+    else:
+        rating = "No reviews yet!"
+
+    return render(request, 'bookDetails.html', {'book': book, 'rating': rating})
+
+def addBookToCollection(request):
+    pass
 
 def logout(request):
     outlog(request)

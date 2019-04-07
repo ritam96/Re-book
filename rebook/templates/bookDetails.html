@@ -7,10 +7,75 @@
 
 {% block main %}
 
-    <div class="container-fluid">
-        <div class="col-4 bookCoverDetails">
+    <div class="row">
+        <div class="col-3 bookCoverDetails">
             <img src="{{ book.cover.url }}" class="coverDetails" />
         </div>
+        <div class="col justify-content-center align-self-center">
+            <div class="titleSpace">
+                <p class="bookDataTitle">{{ book.title }}</p>
+            </div>
+            <span class="detailsTitle">Author: &nbsp;</span>
+            {% for author in book.author.all %}
+                <span class="authorName">{{ author.name }}</span>
+            {% endfor %}
+            <br/>
+            <span class="detailsTitle">Publisher:&nbsp;</span>
+            <span>{{ book.publisher.name }}</span>
+            <br/>
+            <span class="detailsTitle">Year:&nbsp;</span>
+            <span>{{ book.year }}</span>
+            <br />
+
+            <span class="detailsTitle">Average rating:&nbsp;</span>
+            <span>{{ rating }}</span>
+            <br />
+
+            {% if not request.user.is_anonymous %}
+            <div class="bookOptionsButtons">
+                <button type="button" class="btn btn-dark actionButton">Buy this book</button>
+                <button type="button" class="btn btn-dark actionButton">Search for trade</button>
+            </div> 
+            {% endif %}
+
+        </div>
     </div>
+    {% if not request.user.is_anonymous %}
+    <div class="d-flex justify-content-center" data-toggle="modal" data-target="#addBookToCollectionModal">
+            <button type="button" class="btn btn-warning" style="color: black; background-color: #F6E648">Add this book to your collection!</button>
+    </div>
+    {% endif %}
+
+    <div class="modal" id="addBookToCollectionModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h3 class="modal-title">Add Book to Collection</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        <form action="/addBookToCollection" method="POST">{% csrf_token %}
+                            <label class="loginLabels">How much have you read:</label>
+                            <br />
+                            <input name="readingState" class="form-control">
+                            <br />
+                            <label class="loginLabels">What do you want to do with this book:</label>
+                            <br/>
+                            <label class="radio-inline"><input type="radio" name="sell">Sell</label>
+                            <label class="radio-inline"><input type="radio" name="buy">Buy</label>
+                            <label class="radio-inline"><input type="radio" name="keep" checked>Keep</label>
+                            <label class="radio-inline"><input type="radio" name="trade">Trade</label>
+                            <br />
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-dark btn-outline-dark">Confirm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
 
 {% endblock %}

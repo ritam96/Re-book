@@ -28,6 +28,7 @@ urlpatterns = [
     path('register', views.register),
     path('createAccount', views.createAccount),
     path('browse/', views.browse),
-    path('bookDetails', views.bookDetails)
+    path('bookDetails', views.bookDetails),
+    path('addBookToCollection', views.addBookToCollection)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

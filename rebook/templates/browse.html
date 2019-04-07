@@ -4,30 +4,32 @@
 
 {% block main %}
 
-
-        {% for eachBook in queryset %}
+                {% for eachBook in queryset %}
         
-        <div class="row bookListItem">
-            <form id="{{ eachBook.ISBN }}" action="/bookDetails" method="GET">
-                <input name="bookISBN" value="{{ eachBook.ISBN }}" type="hidden"></input>
-            </form>
+                <div class="row bookListItem">
+                    <form id="{{ eachBook.ISBN }}" action="/bookDetails" method="GET">
+                        <input name="bookISBN" value="{{ eachBook.ISBN }}" type="hidden"></input>
+                    </form>
+        
+                    <div class="col-2">
+                        <img src="{{ eachBook.cover.url }}" class="cover" onclick="$('#{{ eachBook.ISBN }}').submit()"/>
+                    </div>
+        
+                    <div class="col bookDetails">    
+                            <p class="bookTitle" onclick="$('#{{ eachBook.ISBN }}').submit()">{{ eachBook.title }}</p>
+        
+                            {% for author in eachBook.author.all %}
+                                <span class="authorName">{{ author.name }}</span>
+                            {% endfor %}
 
-            <div class="col-2">
-                <img src="{{ eachBook.cover.url }}" class="cover" onclick="$('#{{ eachBook.ISBN }}').submit()"/>
-            </div>
-
-            <div class="col-4 bookDetails">    
-                    <p class="bookTitle">{{ eachBook.title }}</p>
-
-                    {% for author in eachBook.author.all %}
-                        <span class="authorName">{{ author.name }}</span>
-                    {% endfor %}
-
-                    <p> {{ bookRatingsDict|get_item:eachBook }}</p>
-                    
-            </div>
-        </div>
-    {% endfor %}
+                            <br />
+                            <span>Average rating:&nbsp;</span>
+                            <span> {{ bookRatingsDict|get_item:eachBook }}</span>
+                            
+                    </div>
+                </div>
+            {% endfor %}
+        
 
 
 

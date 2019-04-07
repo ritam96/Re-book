@@ -89,7 +89,15 @@
 
         {% endif %}
         
-        {% block main %}{% endblock %}        
+        <div class="container-fluid">
+            <div class="row" style="height: 90vh">
+                <div class="col-2 leftGradient"></div>
+                <div class="col-8">
+                    {% block main %}{% endblock %}
+                </div>
+                <div class="col-2 rightGradient"></div>
+            </div>        
+        </div>
         
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -8,6 +8,14 @@ body{
     top: 0
 }
 
+.rightGradient {
+    background-image: linear-gradient(to right, #726F6F , #C8C6C6);
+}
+
+.leftGradient {
+    background-image: linear-gradient(to left, #726F6F , #C8C6C6);
+}
+
 .btn {
     color: #F6E648;
 }
@@ -21,7 +29,8 @@ body{
 }
 
 .bookDetails {
-    text-align: left
+    text-align: left;
+    margin-left: 3vw
 }
 
 .cover {
@@ -37,9 +46,8 @@ body{
     margin-bottom: 2px;
 }
 
-.row {
-    margin-left: 0 !important;
-    margin-right: 0 !important
+.bookTitle, .cover {
+    cursor: pointer
 }
 
 .authorName {
