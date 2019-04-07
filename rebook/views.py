@@ -65,6 +65,28 @@ def bookDetails(request):
     book=Book.objects.get(ISBN=request.session['ISBN'])
     return render(request, 'bookDetails.html', {'book': book})
 
+def editProfile(request):
+    return render(request, 'editProfile.html')
+
+def account(request):
+    return render(request, 'account.html')
+
+def edit(request):
+    user = User.objects.get(username=request.user)
+    print(user)
+    if 'email' in request.POST.keys() and request.POST['email'] != '':
+        print(request.POST['email'])
+        user.email = request.POST['email']
+    elif 'address' in request.POST.keys() and request.POST['address'] != '':
+        user.address = request.POST['address']
+    elif 'password' in request.POST.keys() and request.POST['password'] != '':
+        user.set_password(request.POST['password'])
+        log(request, user)
+    elif 'photo' in request.POST.keys() and request.POST['photo'] in request.FILES:
+        user.photo = request.POST['photo']
+    user.save()
+    return redirect('account')
+
 def logout(request):
     outlog(request)
     return redirect('rebook')
