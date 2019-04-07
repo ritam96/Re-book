@@ -28,6 +28,9 @@ urlpatterns = [
     path('register', views.register),
     path('createAccount', views.createAccount),
     path('browse/', views.browse),
-    path('proposals', views.proposals)
+    path('dashboard', views.dashboard, name='dashboard'),
+    path('proposals', views.proposals, name='proposals'),
+    path('offers', views.offers, name='offers'),
+    path('rejectoffer', views.rejectProposal)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -61,13 +61,25 @@ def createAccount(request):
 
     return redirect('rebook')
 
+def dashboard(request):
+    return render(request, 'proposalsGeneric.html')
+
 def proposals(request):
     user = User.objects.get(username=request.user)
     my_proposals = Proposal.objects.filter(user2=user.id)
+    return render(request, 'proposals.html', { 'my_proposals': my_proposals })
+
+def offers(request):
+    user = User.objects.get(username=request.user)
     offers = Proposal.objects.raw('''SELECT * FROM rebook_proposal 
         JOIN rebook_bookinstance ON bookinstance_id=rebook_bookinstance.id 
-        JOIN rebook_user WHERE User_id=''' + str(user.id))
-    return render(request, 'proposals.html', { 'my_proposals': my_proposals, 'offers': offers })
+        WHERE User_id=''' + str(user.id))
+    return render(request, 'offers.html', { 'offers': offers })
+
+def rejectProposal(request):
+    proposal = request.POST["offer"]
+    Proposal.objects.filter(id=proposal).delete()
+    return redirect('proposals')
 
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.session['ISBN'])

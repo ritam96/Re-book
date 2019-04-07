@@ -3,16 +3,12 @@
 {% load custom_tags %}
 
 {% block main %}
-
-<ul class="nav nav-tabs justify-content-center">
-    <li class="active"><a data-toggle="tab" href="#my-proposals">My Proposals</a></li>
-    <li><a data-toggle="tab" href="#other-proposals">Offers</a></li>
-</ul>
-
-  
-<div class="tab-content">
-    <div id="my-proposals" class="tab-pane fade in active">
-        <h3>My Proposals</h3>
+    <ul class="nav nav-tabs justify-content-center">
+        <li><a class="active" href="proposals" id="toggle-proposals">My Proposals</a></li>
+        <li><a href="offers" id="toggle-offers">Offers</a></li>
+        <li><a href="#" id="toggle-trades">Trades</a></li>
+    </ul>
+    <div class="">
         {% for proposal in my_proposals %}
         <div class="row bookListItem">
             <div class="col-2 bookDetails my-auto">
@@ -32,32 +28,6 @@
             
         {% endfor %}
     </div>
-    <div id="other-proposals" class="tab-pane fade">
-        <h3>Offers</h3>
-        {% for offer in offers %}
-        <div class="row bookListItem">
-            <div class="col-2 bookDetails my-auto">
-                <p class="proposalMaker">From: {{offer.user2.username}}</p>
-            </div>
-            <div class="col-2">
-                <img src="{{ offer.bookInstance.ISBN.cover.url }}" class="cover" id="bookCover"/>
-            </div>
-            <div class="col-4 bookDetails">
-                <p class="bookTitle">{{ offer.bookInstance.ISBN.title }}</p>
-                    {% for author in offer.bookInstance.ISBN.author.all %}
-                        <span class="authorName">{{ author.name }}</span>
-                    {% endfor %}
-            </div>
-
-            <div class="col-4 my-auto">
-                <button class="btn btn-primary">See offer!</button>
-                <button class="btn btn-danger">Reject</button>
-            </div>
-            
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
 
 {% endblock %}
+

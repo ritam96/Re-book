@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% load custom_tags %}
+
+{% block main %}
+    <ul class="nav nav-tabs justify-content-center">
+        <li><a href="proposals" id="toggle-proposals">My Proposals</a></li>
+        <li><a class="active" href="offers" id="toggle-offers">Offers</a></li>
+        <li><a href="#" id="toggle-trades">Trades</a></li>
+    </ul>
+    <div class="">
+        {% for offer in offers %}
+        <div class="row bookListItem">
+            <div class="col-2 bookDetails my-auto">
+                <p class="proposalMaker">From: {{offer.user2.username}}</p>
+            </div>
+            <div class="col-2">
+                <img src="{{ offer.bookInstance.ISBN.cover.url }}" class="cover" id="bookCover"/>
+            </div>
+            <div class="col-4 bookDetails">
+                <p class="bookTitle">{{ offer.bookInstance.ISBN.title }}</p>
+                    {% for author in offer.bookInstance.ISBN.author.all %}
+                        <span class="authorName">{{ author.name }}</span>
+                    {% endfor %}
+            </div>
+    
+            <div class="col-2 my-auto">
+                <form style="text-align:right">{% csrf_token %}
+                    <button class="btn btn-primary">See offer!</button>
+                    <input type="hidden" name="offer" value="{{offer.id}}" />
+                </form>
+            </div>
+            <div class="col-2 my-auto">
+                <form style="text-align:left" method="POST" action="rejectoffer">{% csrf_token %}
+                    <button class="btn btn-danger">Reject</button>
+                    <input type="hidden" name="offer" value="{{offer.id}}" />
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
