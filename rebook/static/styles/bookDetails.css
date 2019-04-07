@@ -1,0 +1,44 @@
+.bookCoverDetails {
+    height: 50vh;
+    margin-top: 5vh;
+    margin-left: 5vh;
+    padding-left: 0
+}
+
+.coverDetails {
+    width: 100%;
+}
+
+.radio-inline {
+    width: 25%
+}
+
+.col {
+    padding-top: 10vh !important;
+    padding-left: 5vw
+}
+
+.bookDataTitle {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.titleSpace {
+    border-bottom: 1px solid black !important;
+    margin-bottom: 4vh;
+    margin-right: 10%;
+}
+
+.bookOptionsButtons {
+    text-align: right !important;
+    margin-right: 10% !important;
+    margin-top: 8% !important;
+}
+
+.actionButton {
+    margin-right: 4%;
+}
+
+.detailsTitle {
+    font-weight: bold !important;
+}

@@ -1,4 +1,8 @@
 .idea
 .vscode
+<<<<<<< HEAD
 __pycache__/
 venv/
+=======
+*/__pycache__/
+>>>>>>> e414c189ae04b4c8640f0f5408292d150f26e3b7
