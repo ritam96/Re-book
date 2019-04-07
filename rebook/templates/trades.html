@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% load custom_tags %}
+
+{% block main %}
+    <ul class="nav nav-tabs justify-content-center">
+        <li><a href="proposals" id="toggle-proposals">Proposals</a></li>
+        <li><a href="offers" id="toggle-offers">Offers</a></li>
+        <li><a class="active" href="trades" id="toggle-trades">Trades</a></li>
+    </ul>
+    <div class="">
+        {% for trade in trades %}
+        <div class="row bookListItemNoBorder">
+            <div class="col-1 bookDetails my-auto">
+                <p>From: {{trade.proposalID.bookInstance.User.username}}</p>
+            </div>
+            <div class="col-2">
+                <img src="{{ trade.proposalID.bookInstance.ISBN.cover.url }}" class="cover" id="bookCover"/>
+            </div>
+            <div class="col-3 bookDetails">
+                <p class="bookTitle">{{ trade.proposalID.bookInstance.ISBN.title }}</p>
+                    {% for author in trade.proposalID.bookInstance.ISBN.author.all %}
+                        <span class="authorName">{{ author.name }}</span>
+                    {% endfor %}
+            </div>
+
+            <div class="col-1 bookDetails my-auto">
+                <p>From: {{trade.bookInstance2.User.username}}</p>
+            </div>
+            <div class="col-2">
+                <img src="{{ trade.bookInstance2.ISBN.cover.url }}" class="cover" id="bookCover"/>
+            </div>
+            <div class="col-3 bookDetails">
+                <p class="bookTitle">{{ trade.bookInstance2.ISBN.title }}</p>
+                    {% for author in trade.bookInstance2.ISBN.author.all %}
+                        <span class="authorName">{{ author.name }}</span>
+                    {% endfor %}
+            </div>
+                
+        </div>
+
+        <div class="row bookListItemButtons justify-content-end">
+            <form action="acceptTrade" method="GET" style="margin-right: 3vw">
+                <button class="btn btn-success">Accept Trade</button>
+                <input type="hidden" name="tradeid" value="{{trade.id}}" />
+            </form>
+
+            <form action="rejectTrade" method="GET" style="margin-right: 7vw">
+                <button class="btn btn-danger">Reject Trade</button>
+                <input type="hidden" name="tradeid" value="{{trade.id}}" />
+            </form>
+        </div>
+            
+        {% endfor %}
+    </div>
+
+{% endblock %}
+

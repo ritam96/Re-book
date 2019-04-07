@@ -20,6 +20,21 @@ body{
     text-align: center;
 }
 
+.bookListItemNoBorder {
+    height: 21vh;
+    padding-bottom: 3vh !important;
+    padding-top: 3vh !important;
+    text-align: center;
+}
+
+.bookListItemButtons {
+    height: 10vh;
+    padding-bottom: 3vh !important;
+    padding-top: 3vh !important;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
 .bookDetails {
     text-align: left
 }

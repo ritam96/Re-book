@@ -31,6 +31,7 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('proposals', views.proposals, name='proposals'),
     path('offers', views.offers, name='offers'),
+    path('trades', views.trades, name='trades'),
     path('rejectoffer', views.rejectProposal)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

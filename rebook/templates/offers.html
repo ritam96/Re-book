@@ -4,9 +4,9 @@
 
 {% block main %}
     <ul class="nav nav-tabs justify-content-center">
-        <li><a href="proposals" id="toggle-proposals">My Proposals</a></li>
+        <li><a href="proposals" id="toggle-proposals">Proposals</a></li>
         <li><a class="active" href="offers" id="toggle-offers">Offers</a></li>
-        <li><a href="#" id="toggle-trades">Trades</a></li>
+        <li><a href="trades" id="toggle-trades">Trades</a></li>
     </ul>
     <div class="">
         {% for offer in offers %}
@@ -26,7 +26,7 @@
     
             <div class="col-2 my-auto">
                 <form style="text-align:right">{% csrf_token %}
-                    <button class="btn btn-primary">See offer!</button>
+                    <button class="btn btn-primary">Make trade!</button>
                     <input type="hidden" name="offer" value="{{offer.id}}" />
                 </form>
             </div>
