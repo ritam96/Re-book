@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User, Book, BookInstance
+from rebook.models import User, Book, BookInstance, Trade
 from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
@@ -32,8 +32,6 @@ def browse(request):
             bookRatingsDict[book] = "No reviews yet!"
 
     return render(request, 'browse.html', {'queryset': queryset, 'bookRatingsDict': bookRatingsDict})
-    
-
 
 def login(request):
     return render(request, 'login.html', {'registering': False})
@@ -61,7 +59,11 @@ def createAccount(request):
 
     log(request, user)
 
-    return redirect('rebook')        
+    return redirect('rebook')
+
+def bookDetails(request):
+    book=Book.objects.get(ISBN=request.session['ISBN'])
+    return render(request, 'bookDetails.html', {'book': book})
 
 def logout(request):
     outlog(request)

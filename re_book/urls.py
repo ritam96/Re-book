@@ -27,6 +27,6 @@ urlpatterns = [
     path('loginWithCredentials', views.loginWithCredentials),
     path('register', views.register),
     path('createAccount', views.createAccount),
-    path('browse/', views.browse)
+    path('browse/', views.browse),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

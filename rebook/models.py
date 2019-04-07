@@ -51,6 +51,7 @@ class BookInstance(models.Model):
 
 class Proposal(models.Model):
     bookInstance = models.ForeignKey(BookInstance, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField()
     user2 = models.ForeignKey(User, on_delete=models.PROTECT)
 
 

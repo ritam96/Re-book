@@ -3,3 +3,7 @@ $(document).ready(function() {
     $("#registerModal").modal()
 })
 
+$('#bookCover').click(function(){
+    $('#bookDetailsForm').submit()
+})
+
