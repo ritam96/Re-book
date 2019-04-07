@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#my-proposals">My Proposals</a></li>
+    <li><a data-toggle="tab" href="#other-proposals">Offers</a></li>
+</ul>
+  
+<div class="tab-content">
+    <div id="my-proposals" class="tab-pane fade in active">
+        <h3>My Proposals</h3>
+        {% for proposal in my_proposals %}
+            <p>{{ proposal.bookInstance.ISBN.ISBN }}</p>
+        {% endfor %}
+    </div>
+    <div id="other-proposals" class="tab-pane fade">
+        <h3>Offers</h3>
+        
+    </div>
+</div>
+
+
+{% endblock %}

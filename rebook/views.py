@@ -61,6 +61,11 @@ def createAccount(request):
 
     return redirect('rebook')
 
+def proposals(request):
+    user = User.objects.get(username=request.user)
+    my_proposals = Proposal.objects.filter(user2=user.id)
+    return render(request, 'proposals.html', { 'my_proposals': my_proposals })
+
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.session['ISBN'])
     return render(request, 'bookDetails.html', {'book': book})
