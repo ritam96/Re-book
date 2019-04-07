@@ -6,20 +6,23 @@
 
 
         {% for eachBook in queryset %}
-        <form id="bookDetailsForm" action="/bookDetails" method="GET">
-            <input name="bookISBN" value="{{ eachBook.ISBN }}" type="hidden"></input>
-        </form>
+        
         <div class="row bookListItem">
+            <form id="{{ eachBook.ISBN }}" action="/bookDetails" method="GET">
+                <input name="bookISBN" value="{{ eachBook.ISBN }}" type="hidden"></input>
+            </form>
+
             <div class="col-2">
-                    <img src="{{ eachBook.cover.url }}" class="cover" id="bookCover"/>
+                <img src="{{ eachBook.cover.url }}" class="cover" onclick="$('#{{ eachBook.ISBN }}').submit()"/>
             </div>
-            <div class="col-4 bookDetails">
-                
+
+            <div class="col-4 bookDetails">    
                     <p class="bookTitle">{{ eachBook.title }}</p>
-                    
-                        {% for author in eachBook.author.all %}
-                            <span class="authorName">{{ author.name }}</span>
-                        {% endfor %}
+
+                    {% for author in eachBook.author.all %}
+                        <span class="authorName">{{ author.name }}</span>
+                    {% endfor %}
+
                     <p> {{ bookRatingsDict|get_item:eachBook }}</p>
                     
             </div>

@@ -62,7 +62,7 @@ def createAccount(request):
     return redirect('rebook')
 
 def bookDetails(request):
-    book=Book.objects.get(ISBN=request.session['ISBN'])
+    book=Book.objects.get(ISBN=request.GET['bookISBN'])
     return render(request, 'bookDetails.html', {'book': book})
 
 def logout(request):

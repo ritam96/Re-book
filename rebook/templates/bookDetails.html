@@ -1,10 +1,15 @@
 {% extends "layout.html" %}
 
+{% block css%}
+{% load static %}
+<link rel="stylesheet"  type="text/css" href="{% static 'styles/bookDetails.css' %}" />
+{% endblock %}
+
 {% block main %}
 
     <div class="container-fluid">
-        <div class="col-4">
-            <img src="{{ book.cover.url }}" />
+        <div class="col-4 bookCoverDetails">
+            <img src="{{ book.cover.url }}" class="coverDetails" />
         </div>
     </div>
 

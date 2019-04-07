@@ -1,0 +1,10 @@
+.bookCoverDetails {
+    height: 50vh;
+    margin-top: 5vh;
+    margin-left: 5vh;
+    padding-left: 0
+}
+
+.coverDetails {
+    height: 100%;
+}
