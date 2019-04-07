@@ -81,7 +81,18 @@ def trades(request):
     trades = Trade.objects.raw('''SELECT * FROM rebook_trade
         JOIN rebook_bookinstance ON bookinstance2_id=rebook_bookinstance.id
         WHERE rebook_trade.state_id=3 AND rebook_bookinstance.User_id=''' + str(user.id))
-    return render(request, 'trades.html', { 'trades': trades })
+
+    finished = Trade.objects.raw('''SELECT * FROM rebook_trade
+        JOIN rebook_bookinstance ON bookinstance2_id=rebook_bookinstance.id
+        JOIN rebook_proposal ON proposalID_id=rebook_proposal.id
+        WHERE rebook_trade.state_id!=3 AND rebook_bookinstance.User_id=''' + str(user.id))
+    
+    remaining = Trade.objects.raw('''SELECT * FROM rebook_trade
+        JOIN rebook_proposal ON proposalID_id=rebook_proposal.id
+        JOIN rebook_bookinstance ON rebook_proposal.bookinstance_id=rebook_bookinstance.id
+        WHERE rebook_trade.state_id!=3 AND rebook_bookinstance.User_id=''' + str(user.id))
+    
+    return render(request, 'trades.html', { 'trades': trades, 'finished': finished, 'remaining': remaining })
 
 def rejectProposal(request):
     proposal = request.POST["offer"]
@@ -115,6 +126,13 @@ def confirmTrade(request):
     Proposal.objects.filter(id=proposal.id).update(state=accepted)
     return redirect('trades')
 
+def rejectTrade(request):
+    trade = Trade.objects.get(id=request.POST['trade'])
+    proposal = trade.proposalID
+    accepted = TradeState.objects.get(id=2)
+    Trade.objects.filter(id=request.POST['trade']).update(state=accepted)
+    Proposal.objects.filter(id=proposal.id).update(state=accepted)
+    return redirect('trades')
 
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.session['ISBN'])

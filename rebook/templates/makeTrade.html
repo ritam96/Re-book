@@ -4,19 +4,29 @@
 
 {% block main %}
     <ul class="nav nav-tabs justify-content-center">
-        <li><a href="proposals" id="toggle-proposals">Proposals</a></li>
-        <li><a href="offers" id="toggle-offers">Offers</a></li>
-        <li><a href="trades" id="toggle-trades">Trades</a></li>
+        <li><a href="/proposals" id="toggle-proposals">Proposals</a></li>
+        <li><a href="/offers" id="toggle-offers">Offers</a></li>
+        <li><a href="/trades" id="toggle-trades">Trades</a></li>
     </ul>
+    <div class="user-section">
+        <div class="row bookListItem">
+            <div class="col-2 my-auto">
+                <p>{{user.username}}</p>
+                <p>{{user.email}}</p>
+            </div>
+            <div class="col-3 my-auto">{{user.address}}</div>
+            <div class="col-3 my-auto">
+                <img src="{{ user.photo }}" class="cover"/>
+            </div>
+        </div>
+    </div>
+
     <div class="">
         <form id="tradeForm" action="/acceptTrade" method="POST">{% csrf_token %}
             {% for book in books %}
             <div class="row bookListItem">
                 <div class="col-2 my-auto">
                     <input name="book" type="radio" value="{{ book.id }}" />
-                </div>
-                <div class="col-2 bookDetails my-auto">
-                    <p class="proposalMaker">From: {{user.username}}</p>
                 </div>
                 <div class="col-2">
                     <img src="{{ book.ISBN.cover.url }}" class="cover" id="bookCover"/>

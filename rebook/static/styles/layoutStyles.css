@@ -154,3 +154,7 @@ body{
     font-size: 1.3em;
     font-weight: bold
 }
+
+.spacer {
+    height: 15vh;
+}

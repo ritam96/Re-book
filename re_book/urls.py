@@ -36,5 +36,6 @@ urlpatterns = [
     path('acceptoffer/', views.acceptProposal, name="acceptoffer"),
     path('acceptTrade', views.acceptTrade, name="acceptTrade"),
     path('confirmTrade/', views.confirmTrade, name="confirmTrade"),
+    path('rejectTrade/', views.rejectTrade, name="rejectTrade"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
