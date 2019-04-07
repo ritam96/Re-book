@@ -16,6 +16,7 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(User)
 admin.site.register(Author)
 admin.site.register(Publisher)
+admin.site.register(Ratings)
 admin.site.register(Book)
 admin.site.register(BookState)
 admin.site.register(BookGoals)

@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.files.storage import FileSystemStorage
 
 # Create your models here.
-
+fs = FileSystemStorage(location='/media/covers')
 
 class User(AbstractUser):
     address = models.CharField(max_length=200)
@@ -24,7 +25,7 @@ class Book(models.Model):
     author = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     year = models.IntegerField()
-    cover = models.ImageField()
+    cover = models.ImageField(storage=fs)
 
 
 class BookState(models.Model):
@@ -34,6 +35,9 @@ class BookState(models.Model):
 class BookGoals(models.Model):
     goal = models.CharField(max_length=30)
 
+class Ratings(models.Model):
+    numberStars = models.IntegerField(primary_key=True)
+    rating = models.CharField(max_length=20)
 
 class BookInstance(models.Model):
     ISBN = models.ForeignKey(Book, on_delete=models.PROTECT)
@@ -41,6 +45,8 @@ class BookInstance(models.Model):
     state = models.ForeignKey(BookState, on_delete=models.PROTECT)
     readingState = models.DecimalField(max_digits=4, decimal_places=3)
     goal = models.ForeignKey(BookGoals, on_delete=models.PROTECT)
+    rating = models.ForeignKey(Ratings, on_delete=models.PROTECT, default=None)
+
 
 
 class Proposal(models.Model):

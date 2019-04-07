@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rebook import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', views.logout),
-    path('', views.rebook, name='rebook'),
+    path('', views.browse, name='rebook'),
     path('login/', views.login),
     path('loginWithCredentials', views.loginWithCredentials),
     path('register', views.register),
-    path('createAccount', views.createAccount)
-]
+    path('createAccount', views.createAccount),
+    path('browse/', views.browse)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

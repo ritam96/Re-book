@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User
-
+from rebook.models import User, Book, BookInstance
+from django.core import serializers
+from django.db import connection
+from django.template.defaulttags import register
 
 # Create your views here.
 def rebook(request):
@@ -14,6 +16,24 @@ def rebook(request):
         request.session["hasNotifications"] = False
 
     return render(request, 'layout.html')
+
+def browse(request):
+    queryset = Book.objects.order_by("-year")[:10]
+
+    bookRatingsDict = {}
+    for book in queryset:
+        cursor = connection.cursor()
+        cursor.execute("SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
+        result = cursor.fetchall()
+        if result[0][0] != None:
+            bookRatingsDict[book] = result[0][0]
+            
+        else:
+            bookRatingsDict[book] = "No reviews yet!"
+
+    return render(request, 'browse.html', {'queryset': queryset, 'bookRatingsDict': bookRatingsDict})
+    
+
 
 def login(request):
     return render(request, 'login.html', {'registering': False})

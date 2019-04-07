@@ -1,10 +1,50 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .navbar {
     height: 10vh;
     background-color: #323232 !important;
+    top: 0
 }
 
 .btn {
     color: #F6E648;
+}
+
+.bookListItem {
+    height: 21vh;
+    padding-bottom: 3vh !important;
+    padding-top: 3vh !important;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.bookDetails {
+    text-align: left
+}
+
+.cover {
+    height: 15vh;
+    margin-right: 5vw;
+    padding-left: 5vw
+}
+
+.bookTitle {
+    font-size: 1.3rem;
+    margin-top: 2vh;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important
+}
+
+.authorName {
+    font-size: 1rem;
+    margin-right: 10px
 }
 
 .nav-item {
@@ -12,7 +52,7 @@
     font-size: 1.3rem;
     width:8vw;
     text-align: center;
-    line-height: 7vh
+    line-height: 7vh;
 }
 
 .nav-item:hover, .nav-item:active {
