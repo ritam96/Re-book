@@ -15,9 +15,21 @@
                 </figure>
             </div>
         </div>
-        <div class="row" style=" margin-left: 450px;" >
-                <a id="edit" class="btn btn-primary" href="/editProfile/" style=" background-color: #323232; border-color: #323232; width: 80px; height: 40px" role="button">Edit</a>
+        <div class="row" >
+            <div class="col-lg-5">
+                <a id="edit" class="btn btn-dark btn-outline-dark" href="/editProfile/" style=" background-color: #323232; border-color: #323232; width: 100px; height: 40px" role="button">Edit</a>
+            </div>
+            <div class="col-lg-3">
+                <form action="/deleteUser/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-actions">
+                        <button id="edit" type="submit" class="btn btn-dark btn-outline-dark" style=" background-color: #323232; border-color: #323232; width: 100px; height: 40px" role="button">Delete</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
+
     </div>
 
 {% endblock %}
