@@ -29,6 +29,11 @@ urlpatterns = [
     path('createAccount', views.createAccount),
     path('browse/', views.browse),
     path('bookDetails', views.bookDetails),
-    path('addBookToCollection', views.addBookToCollection)
+    path('addBookToCollection', views.addBookToCollection),
+    path('account/', views.account, name='account'),
+    path('editProfile/', views.editProfile, name='editProfile'),
+    path('edit/', views.edit),
+    path('search/', views.search),
+    path('deleteUser/', views.deleteUser)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

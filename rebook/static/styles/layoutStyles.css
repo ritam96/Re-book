@@ -118,3 +118,13 @@ body{
 .logo {
     height: 9vh;
 }
+
+#edit {
+    color: white !important;
+    text-align: center;
+
+}
+
+#edit:hover, #edit:active {
+    color: #FFF698 !important
+}

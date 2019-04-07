@@ -38,12 +38,13 @@
                     <a class="nav-item nav-link" href="#">Collection</a>
                     <a class="nav-item nav-link" href="#">Trades</a>
                 </div>
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="/search/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
+                    {% csrf_token %}
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
                 </form>
                 <div class="navbar-nav ml-5">
-                    <a class="nav-item nav-link" href="#">Account</a>
+                    <a class="nav-item nav-link" href="/account/">Account</a>
                     {% if not request.session.hasNotifications %}
                     <a class="nav-item nav-link" style="width: 5vw" href="#">
                         <img style="height:5vh; padding-top:5px" src={% static 'images/envelope.png' %}/>
@@ -72,8 +73,9 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="/search/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
+                    {% csrf_token %}
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
                 </form>
                 <div class="navbar-nav ml-5" data-toggle="modal" data-target="#loginModal">
