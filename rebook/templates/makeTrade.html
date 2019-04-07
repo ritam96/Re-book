@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% load custom_tags %}
+
+{% block main %}
+    <ul class="nav nav-tabs justify-content-center">
+        <li><a href="proposals" id="toggle-proposals">Proposals</a></li>
+        <li><a href="offers" id="toggle-offers">Offers</a></li>
+        <li><a href="trades" id="toggle-trades">Trades</a></li>
+    </ul>
+    <div class="">
+        <form id="tradeForm" action="/acceptTrade" method="POST">{% csrf_token %}
+            {% for book in books %}
+            <div class="row bookListItem">
+                <div class="col-2 my-auto">
+                    <input name="book" type="radio" value="{{ book.id }}" />
+                </div>
+                <div class="col-2 bookDetails my-auto">
+                    <p class="proposalMaker">From: {{user.username}}</p>
+                </div>
+                <div class="col-2">
+                    <img src="{{ book.ISBN.cover.url }}" class="cover" id="bookCover"/>
+                </div>
+                <div class="col-4 bookDetails">
+                    <p class="bookTitle">{{ book.ISBN.title }}</p>
+                        {% for author in book.ISBN.author.all %}
+                            <span class="authorName">{{ author.name }}</span>
+                        {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <input type="hidden" name="proposal" value="{{proposal.id}}" />
+        </form>
+
+        <div class="row my-auto align-items-center">
+            <button id="acceptTradeBtn" class="btn btn-success">Accept Trade</button>
+            <form style="text-align:left" method="POST" action="/rejectoffer">{% csrf_token %}
+                <button class="btn btn-danger">Reject</button>
+                <input type="hidden" name="offer" value="{{proposal.id}}" />
+            </form>   
+        </div>
+        
+    </div>
+
+{% endblock %}

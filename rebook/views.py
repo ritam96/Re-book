@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User, Book, BookInstance, Trade, Proposal
+from rebook.models import User, Book, BookInstance, Trade, Proposal, TradeState
 from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
@@ -73,21 +73,48 @@ def offers(request):
     user = User.objects.get(username=request.user)
     offers = Proposal.objects.raw('''SELECT * FROM rebook_proposal 
         JOIN rebook_bookinstance ON bookinstance_id=rebook_bookinstance.id 
-        WHERE User_id=''' + str(user.id))
+        WHERE rebook_proposal.state_id=3 AND User_id=''' + str(user.id))
     return render(request, 'offers.html', { 'offers': offers })
 
 def trades(request):
     user = User.objects.get(username=request.user)
     trades = Trade.objects.raw('''SELECT * FROM rebook_trade
         JOIN rebook_bookinstance ON bookinstance2_id=rebook_bookinstance.id
-        WHERE rebook_bookinstance.User_id=''' + str(user.id))
-    print(len(trades))
+        WHERE rebook_trade.state_id=3 AND rebook_bookinstance.User_id=''' + str(user.id))
     return render(request, 'trades.html', { 'trades': trades })
 
 def rejectProposal(request):
     proposal = request.POST["offer"]
-    Proposal.objects.filter(id=proposal).delete()
+    state = TradeState.objects.get(id=2)
+    Proposal.objects.filter(id=proposal).update(state=state)
     return redirect('offers')
+
+def acceptProposal(request):
+    proposal = Proposal.objects.get(id=request.POST["offer"])
+    user = User.objects.get(id=request.POST["user"])
+    books = BookInstance.objects.filter(User=user)
+    return render(request, 'makeTrade.html', { 'proposal': proposal, 'books': books, 'user': user })
+
+
+def acceptTrade(request):
+    proposal = Proposal.objects.get(id=request.POST["proposal"])
+    book = BookInstance.objects.get(id=request.POST["book"])
+    pending = TradeState.objects.get(id=3)
+    trade = Trade(proposalID=proposal, bookInstance2=book, state=pending)
+    trade.save()
+
+    trading = TradeState.objects.get(id=4)
+    Proposal.objects.filter(id=request.POST["proposal"]).update(state=trading)
+    return redirect('offers')
+
+def confirmTrade(request):
+    trade = Trade.objects.get(id=request.POST['trade'])
+    proposal = trade.proposalID
+    accepted = TradeState.objects.get(id=1)
+    Trade.objects.filter(id=request.POST['trade']).update(state=accepted)
+    Proposal.objects.filter(id=proposal.id).update(state=accepted)
+    return redirect('trades')
+
 
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.session['ISBN'])

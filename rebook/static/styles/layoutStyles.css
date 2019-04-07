@@ -149,3 +149,8 @@ body{
     border-bottom: 3px solid white;
     font-weight: bold;
 }
+
+.state {
+    font-size: 1.3em;
+    font-weight: bold
+}

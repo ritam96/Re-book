@@ -47,17 +47,15 @@ class BookInstance(models.Model):
     goal = models.ForeignKey(BookGoals, on_delete=models.PROTECT)
     rating = models.ForeignKey(Ratings, on_delete=models.PROTECT, default=None, null=True)
 
-
+class TradeState(models.Model):
+    state = models.CharField(max_length=20)
 
 class Proposal(models.Model):
     bookInstance = models.ForeignKey(BookInstance, on_delete=models.CASCADE)
     timestamp = models.DateTimeField()
     user2 = models.ForeignKey(User, on_delete=models.PROTECT)
-    #state = models.ForeignKey(TradeState, on_delete=models.PROTECT)
+    state = models.ForeignKey(TradeState, on_delete=models.PROTECT)
 
-
-class TradeState(models.Model):
-    state = models.CharField(max_length=20)
 
 
 class Trade(models.Model):

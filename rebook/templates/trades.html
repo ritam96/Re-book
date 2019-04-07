@@ -40,14 +40,14 @@
         </div>
 
         <div class="row bookListItemButtons justify-content-end">
-            <form action="acceptTrade" method="GET" style="margin-right: 3vw">
+            <form action="confirmTrade/" method="POST" style="margin-right: 3vw">{% csrf_token %}
                 <button class="btn btn-success">Accept Trade</button>
-                <input type="hidden" name="tradeid" value="{{trade.id}}" />
+                <input type="hidden" name="trade" value="{{trade.id}}" />
             </form>
 
-            <form action="rejectTrade" method="GET" style="margin-right: 7vw">
+            <form action="rejectTrade" method="POST" style="margin-right: 7vw">{% csrf_token %}
                 <button class="btn btn-danger">Reject Trade</button>
-                <input type="hidden" name="tradeid" value="{{trade.id}}" />
+                <input type="hidden" name="trade" value="{{trade.id}}" />
             </form>
         </div>
             

@@ -23,8 +23,28 @@
                         <span class="authorName">{{ author.name }}</span>
                     {% endfor %}
             </div>
-                
+
+            
+            <div col-1 class="my-auto">
+                {% ifequal proposal.state.id 1 %}
+                    <span class="authorName state" style="color: green">{{ proposal.state.state }}</span>
+                {% endifequal %}
+
+                {% ifequal proposal.state.id 2 %}
+                    <span class="authorName state" style="color: red">{{ proposal.state.state }}</span>
+                {% endifequal %}
+
+                {% ifequal proposal.state.id 3 %}
+                    <span class="authorName state" style="color: #ffa20e">{{ proposal.state.state }}</span>
+                {% endifequal %}
+
+                {% ifequal proposal.state.id 4 %}
+                    <span class="authorName state" style="color: #ffa20e">{{ proposal.state.state }}</span>
+                {% endifequal %}
             </div>
+            
+                
+        </div>
             
         {% endfor %}
     </div>
