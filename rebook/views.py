@@ -31,11 +31,11 @@ def browse(request):
         if result[0][0] != None:
             rating = float(result[0][0])
             integer = rating.is_integer()
-            final = ['star']
+            final = []
             fullStar = math.floor(rating)
             if integer is False:
                 final.append('star-half')
-            i = 1
+            i = 0
             star = ['star']
             while i < fullStar:
                 final = star + final
@@ -150,12 +150,21 @@ def bookDetails(request):
     cursor = connection.cursor()
     cursor.execute("SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
     result = cursor.fetchall()
-    if result[0][0] != None:
-        rating = result[0][0]
-    else:
-        rating = "No reviews yet!"
 
-    return render(request, 'bookDetails.html', {'book': book, 'rating': rating})
+    final = []
+    if result[0][0] != None:
+        rating = float(result[0][0])
+        integer = rating.is_integer()
+        fullStar = math.floor(rating)
+        if integer is False:
+            final.append('star-half')
+        i = 0
+        star = ['star']
+        while i < fullStar:
+            final = star + final
+            i += 1
+
+    return render(request, 'bookDetails.html', {'book': book, 'rating': final})
 
 
 def booksForSale(request, isbn):
@@ -267,11 +276,11 @@ def search(request):
         if result[0][0] != None:
             rating = float(result[0][0])
             integer = rating.is_integer()
-            final = ['star']
+            final = []
             fullStar = math.floor(rating)
             if integer is False:
                 final.append('star-half')
-            i = 1
+            i = 0
             star = ['star']
             while i < fullStar:
                 final = star + final
@@ -310,11 +319,11 @@ def collection(request):
         else:
             rating = float(book[4])
             integer = rating.is_integer()
-            final = ['star']
+            final = []
             fullStar = math.floor(rating)
             if integer is False:
                 final.append('star-half')
-            i=1
+            i=0
             star=['star']
             while i < fullStar:
                 final = star + final
@@ -361,11 +370,11 @@ def searchCollection(request):
                 else:
                     rating = float(bookinstance.rating_id)
                     integer = rating.is_integer()
-                    final = ['star']
+                    final = []
                     fullStar = math.floor(rating)
                     if integer is False:
                         final.append('star-half')
-                    i = 1
+                    i = 0
                     star = ['star']
                     while i < fullStar:
                         final = star + final

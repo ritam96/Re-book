@@ -38,7 +38,7 @@
                             {% load icons %}
                             {% if bookRatingsDict|get_item:eachBook %}
                                 {% for star in bookRatingsDict|get_item:eachBook %}
-                                    {% icon  star  %}
+                                    <span style="color: #F6E648">{% icon star  %}</span>
                                 {% endfor %}
                             {% else %}
                                 <p>No reviews yet!</p>
