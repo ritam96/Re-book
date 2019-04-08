@@ -2,6 +2,16 @@
 
 {% load custom_tags %}
 
+{% block navbar %}
+    <form action="/searchCollection/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
+        {% csrf_token %}
+        <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
+    </form>
+{% endblock %}
+
+
+
 {% block main %}
 
 
@@ -17,18 +27,22 @@
                 <div class="row">
                     <p class="bookTitle">{{ eachBook.title }}</p>
                 </div>
+
                 <div class="row">
-                    <div class="col-4 bookDetails">
+                    <div class="col-5 bookDetails">
+                        <b>Book goal: </b> {{ eachBook.goal }}
+                        <br />
+                        <b>Book state: </b> {{ eachBook.state }}
+                    </div>
+                    <div class="col-5 bookDetails">
                         {% load icons %}
                         {% if eachBook.rating %}
                             {% for star in eachBook.rating %}
-                                {% icon  star  %}
+                               <span style="color: #F6E648">{% icon star  %}</span>
                             {% endfor %}
                         {% else %}
                             <p>No reviews yet!</p>
                         {% endif %}
-                    </div>
-                    <div class="col-4 bookDetails">
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{ eachBook.readingState }}; background-color: #F6E648; color: #323232;">
                                 {{ eachBook.readingState }}

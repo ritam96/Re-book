@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User, Book, BookInstance, Trade, Proposal, TradeState
+from rebook.models import *
 from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
@@ -159,7 +159,7 @@ def bookDetails(request):
     cursor.execute("SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
     result = cursor.fetchall()
     if result[0][0] != None:
-        rating = result[0][0] 
+        rating = result[0][0]
     else:
         rating = "No reviews yet!"
 
@@ -241,8 +241,9 @@ def deleteUser(request):
 def collection(request):
     user = User.objects.get(username=request.user.username)
     cursor = connection.cursor()
-    cursor.execute("SELECT ISBN, title, cover, readingState , rating_id FROM rebook_bookinstance JOIN rebook_book ON rebook_bookinstance.ISBN_id = rebook_book.ISBN WHERE User_id="+ str(user.id))
+    cursor.execute("SELECT ISBN, title, cover, readingState , rating_id, state_id, goal_id FROM rebook_bookinstance JOIN rebook_book ON rebook_bookinstance.ISBN_id = rebook_book.ISBN WHERE User_id="+ str(user.id))
     result = cursor.fetchall()
+    print(result)
     books = [];
     for book in result:
         tempBook = {}
@@ -268,6 +269,8 @@ def collection(request):
                 i+=1
 
             tempBook["rating"] = final
+        tempBook["state"] = BookState.objects.get(id = str(book[5])).state
+        tempBook["goal"] = BookGoals.objects.get(id = str(book[6])).goal
         books.append(tempBook)
 
     print(books)
@@ -276,8 +279,52 @@ def collection(request):
 
 
 def searchCollection(request):
-    #print(request.POST['query'])
+    print(request.POST['query'])
+    query = request.POST['query']
+    books_tittle = Book.objects.filter(title__contains=query)
+    books_author = Book.objects.filter(author__name__contains=query)
+    books_publisher = Book.objects.filter(publisher__name__contains=query)
+    books = list(itertools.chain(books_tittle, books_author, books_publisher))
 
-    #return render(request, 'collection.html')
 
-    pass
+    user = User.objects.get(username=request.user.username)
+    listBookInstance = BookInstance.objects.filter(User=user)
+
+    bookRatingsDict = []
+
+    for book in books:
+        print(book.ISBN)
+        for bookinstance in listBookInstance:
+            if book.ISBN == bookinstance.ISBN_id:
+                tempBook = {}
+                tempBook["ISBN"] = bookinstance.ISBN_id
+                tempBook["title"] = book.title
+                print(book.cover)
+                tempBook["cover"] = "/media/" + str(book.cover)
+                tempBook["readingState"] = str(float(bookinstance.readingState) * 100) + "%"
+
+                if bookinstance.rating_id == None:
+                    tempBook["rating"] = []
+
+                else:
+                    rating = float(bookinstance.rating_id)
+                    integer = rating.is_integer()
+                    final = ['star']
+                    fullStar = math.floor(rating)
+                    if integer is False:
+                        final.append('star-half')
+                    i = 1
+                    star = ['star']
+                    while i < fullStar:
+                        final = star + final
+                        i += 1
+
+                    tempBook["rating"] = final
+                tempBook["state"] = BookState.objects.get(id=str(bookinstance.state_id)).state
+                tempBook["goal"] = BookGoals.objects.get(id=str(bookinstance.goal_id)).goal
+
+                bookRatingsDict.append(tempBook)
+
+    print(bookRatingsDict)
+    return render(request, 'collection.html', {'books': bookRatingsDict})
+

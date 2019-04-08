@@ -48,11 +48,9 @@
                     <a class="nav-item nav-link" href="/collection">Collection</a>
                     <a class="nav-item nav-link" href="/trades">Trades</a>
                 </div>
-                <form action="/search/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
-                    {% csrf_token %}
-                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
-                </form>
+
+                {% block navbar %}{% endblock %}
+
                 <div class="navbar-nav ml-5">
                     <a class="nav-item nav-link" href="/account/">Account</a>
                     {% if not request.session.hasNotifications %}

@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
 
+
+{% block navbar %}
+    <form action="/search/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
+        {% csrf_token %}
+        <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
+    </form>
+{% endblock %}
+
+
 {% block content %}
     
     {% if not registering %}

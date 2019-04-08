@@ -2,6 +2,16 @@
 
 {% load custom_tags %}
 
+
+{% block navbar %}
+    <form action="/search/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
+        {% csrf_token %}
+        <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
+    </form>
+{% endblock %}
+
+
 {% block main %}
     <ul class="row nav nav-tabs justify-content-center">
         <li><a href="/proposals" id="toggle-proposals">Proposals</a></li>
