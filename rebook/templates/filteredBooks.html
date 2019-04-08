@@ -17,10 +17,20 @@
 
                     <p class="bookTitle">{{ eachBook.title }}</p>
 
-                        {% for author in eachBook.author.all %}
-                            <span class="authorName">{{ author.name }}</span>
+                    {% for author in eachBook.author.all %}
+                        <span class="authorName">{{ author.name }}</span>
+                    {% endfor %}
+
+
+                    <br />
+                    {% load icons %}
+                    {% if bookRatingsDict|get_item:eachBook %}
+                        {% for star in bookRatingsDict|get_item:eachBook %}
+                            {% icon  star  %}
                         {% endfor %}
-                    <p> {{ bookRatingsDict|get_item:eachBook }}</p>
+                    {% else %}
+                        <p>No reviews yet!</p>
+                    {% endif %}
 
             </div>
         </div>

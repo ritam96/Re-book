@@ -42,6 +42,8 @@ urlpatterns = [
     path('editProfile/', views.editProfile, name='editProfile'),
     path('edit/', views.edit),
     path('search/', views.search),
-    path('deleteUser/', views.deleteUser)
+    path('deleteUser/', views.deleteUser),
+    path('collection/', views.collection),
+    path('searchCollection/', views.searchCollection),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

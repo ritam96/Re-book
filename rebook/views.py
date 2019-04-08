@@ -7,6 +7,7 @@ from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
 import itertools
+import math
 
 # Create your views here.
 def rebook(request):
@@ -28,10 +29,22 @@ def browse(request):
         cursor.execute("SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
         result = cursor.fetchall()
         if result[0][0] != None:
-            bookRatingsDict[book] = result[0][0]
+            rating = float(result[0][0])
+            integer = rating.is_integer()
+            final = ['star']
+            fullStar = math.floor(rating)
+            if integer is False:
+                final.append('star-half')
+            i = 1
+            star = ['star']
+            while i < fullStar:
+                final = star + final
+                i += 1
+
+            bookRatingsDict[book] = final
             
         else:
-            bookRatingsDict[book] = "No reviews yet!"
+            bookRatingsDict[book] = []
 
     return render(request, 'browse.html', {'queryset': queryset, 'bookRatingsDict': bookRatingsDict})
 
@@ -200,10 +213,22 @@ def search(request):
             "SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
         result = cursor.fetchall()
         if result[0][0] != None:
-            bookRatingsDict[book] = result[0][0]
+            rating = float(result[0][0])
+            integer = rating.is_integer()
+            final = ['star']
+            fullStar = math.floor(rating)
+            if integer is False:
+                final.append('star-half')
+            i = 1
+            star = ['star']
+            while i < fullStar:
+                final = star + final
+                i += 1
+
+            bookRatingsDict[book] = final
 
         else:
-            bookRatingsDict[book] = "No reviews yet!"
+            bookRatingsDict[book] = []
 
     print(books)
 
@@ -212,3 +237,47 @@ def search(request):
 def deleteUser(request):
     User.objects.filter(username=request.user).delete()
     return redirect('rebook')
+
+def collection(request):
+    user = User.objects.get(username=request.user.username)
+    cursor = connection.cursor()
+    cursor.execute("SELECT ISBN, title, cover, readingState , rating_id FROM rebook_bookinstance JOIN rebook_book ON rebook_bookinstance.ISBN_id = rebook_book.ISBN WHERE User_id="+ str(user.id))
+    result = cursor.fetchall()
+    books = [];
+    for book in result:
+        tempBook = {}
+        tempBook["ISBN"] = book[0]
+        tempBook["title"] = book[1]
+        tempBook["cover"] = "/media/" + book[2]
+        tempBook["readingState"] = str(book[3]*100) + "%"
+
+        if book[4] == None:
+            tempBook["rating"] = []
+
+        else:
+            rating = float(book[4])
+            integer = rating.is_integer()
+            final = ['star']
+            fullStar = math.floor(rating)
+            if integer is False:
+                final.append('star-half')
+            i=1
+            star=['star']
+            while i < fullStar:
+                final = star + final
+                i+=1
+
+            tempBook["rating"] = final
+        books.append(tempBook)
+
+    print(books)
+
+    return render(request, 'collection.html', {'books': books})
+
+
+def searchCollection(request):
+    #print(request.POST['query'])
+
+    #return render(request, 'collection.html')
+
+    pass
