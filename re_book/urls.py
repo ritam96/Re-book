@@ -28,7 +28,6 @@ urlpatterns = [
     path('register', views.register),
     path('createAccount', views.createAccount),
     path('browse/', views.browse),
-    path('dashboard', views.dashboard, name='dashboard'),
     path('proposals', views.proposals, name='proposals'),
     path('offers', views.offers, name='offers'),
     path('trades', views.trades, name='trades'),

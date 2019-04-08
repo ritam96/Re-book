@@ -67,10 +67,6 @@ def createAccount(request):
 
     return redirect('rebook')
 
-<<<<<<< HEAD
-def dashboard(request):
-    return render(request, 'proposalsGeneric.html')
-
 def proposals(request):
     user = User.objects.get(username=request.user)
     my_proposals = Proposal.objects.filter(user2=user.id)
@@ -140,8 +136,6 @@ def rejectTrade(request):
     Trade.objects.filter(id=request.POST['trade']).update(state=accepted)
     Proposal.objects.filter(id=proposal.id).update(state=accepted)
     return redirect('trades')
-=======
->>>>>>> e414c189ae04b4c8640f0f5408292d150f26e3b7
 
 def bookDetails(request):
     book=Book.objects.get(ISBN=request.GET['bookISBN'])

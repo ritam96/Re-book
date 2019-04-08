@@ -134,11 +134,10 @@ body{
     height: 9vh;
 }
 
-<<<<<<< HEAD
 
 .nav.nav-tabs {
-    background-color: gray;
-    height: 7vh;
+    background-color: black;
+    height: 6vh;
 }
 .nav.nav-tabs li {
     justify-content: center;
@@ -166,7 +165,9 @@ body{
 
 .spacer {
     height: 15vh;
-=======
+
+}
+
 #edit {
     color: white !important;
     text-align: center;
@@ -175,5 +176,4 @@ body{
 
 #edit:hover, #edit:active {
     color: #FFF698 !important
->>>>>>> e414c189ae04b4c8640f0f5408292d150f26e3b7
 }
