@@ -23,8 +23,14 @@
                             {% endfor %}
 
                             <br />
-                            <span>Average rating:&nbsp;</span>
-                            <span> {{ bookRatingsDict|get_item:eachBook }}</span>
+                            {% load icons %}
+                            {% if bookRatingsDict|get_item:eachBook %}
+                                {% for star in bookRatingsDict|get_item:eachBook %}
+                                    {% icon  star  %}
+                                {% endfor %}
+                            {% else %}
+                                <p>No reviews yet!</p>
+                            {% endif %}
                             
                     </div>
                 </div>

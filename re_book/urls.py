@@ -44,6 +44,8 @@ urlpatterns = [
     path('search/', views.search),
     path('deleteUser/', views.deleteUser),
     path('booksForSale/<str:isbn>', views.booksForSale, name='booksForSale'),
-    path('booksForTrade/<str:isbn>', views.booksForTrade, name='booksForTrade')
+    path('booksForTrade/<str:isbn>', views.booksForTrade, name='booksForTrade'),
+    path('collection/', views.collection),
+    path('searchCollection/', views.searchCollection),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
