@@ -42,6 +42,8 @@ urlpatterns = [
     path('editProfile/', views.editProfile, name='editProfile'),
     path('edit/', views.edit),
     path('search/', views.search),
-    path('deleteUser/', views.deleteUser)
+    path('deleteUser/', views.deleteUser),
+    path('booksForSale/<str:isbn>', views.booksForSale, name='booksForSale'),
+    path('booksForTrade/<str:isbn>', views.booksForTrade, name='booksForTrade')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

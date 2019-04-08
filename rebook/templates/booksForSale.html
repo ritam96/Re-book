@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% load custom_tags %}
+
+{% block main %}
+
+                {% for instance in instances %}
+
+                <div class="row bookListItem">
+                    <div class="col-2">
+                        <img src="{{ book.cover.url }}" class="cover"/>
+                    </div>
+                    <div class="col bookDetails">
+                        <p class="bookTitle" >{{ book.title }}</p>
+
+                        {% for author in book.author.all %}
+                            <span class="authorName">{{ author.name }}</span>
+                        {% endfor %}
+
+                        <br />
+                        <span>Average rating:&nbsp;</span>
+                        <span> {{ rating }}</span>
+
+                    </div>
+                    <div class="col bookDetails">
+                        <br />
+                        <br />
+                        <span>Book state:&nbsp;</span>
+                        <span> {{ instance.state.state }}</span>
+                        <br />
+                        <span>Book owner:&nbsp;</span>
+                        <span> {{ instance.User.username }}</span>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+
+{% endblock %}

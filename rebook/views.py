@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User, Book, BookInstance, Trade, Proposal, TradeState
+from rebook.models import User, Book, BookInstance, Trade, Proposal, TradeState, BookGoals
 from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
@@ -151,6 +151,43 @@ def bookDetails(request):
         rating = "No reviews yet!"
 
     return render(request, 'bookDetails.html', {'book': book, 'rating': rating})
+
+
+def booksForSale(request, isbn):
+    book = Book.objects.get(ISBN=isbn)
+    instancesForSale = BookInstance.objects.raw('''SELECT * FROM rebook_bookinstance
+    WHERE goal_id=1 AND ISBN_id='''+str(isbn))
+    rating = None
+
+    # Calculate average rating
+    cursor = connection.cursor()
+    cursor.execute(
+        "SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
+    result = cursor.fetchall()
+    if result[0][0] != None:
+        rating = result[0][0]
+    else:
+        rating = "No reviews yet!"
+    return render(request, 'booksForSale.html', {'book': book, 'instances': instancesForSale, 'rating': rating})
+
+
+def booksForTrade(request, isbn):
+    book = Book.objects.get(ISBN=isbn)
+    instancesForTrade = BookInstance.objects.raw('''SELECT * FROM rebook_bookinstance
+    WHERE goal_id=4 AND ISBN_id='''+str(isbn))
+    rating = None
+
+    # Calculate average rating
+    cursor = connection.cursor()
+    cursor.execute(
+        "SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
+    result = cursor.fetchall()
+    if result[0][0] != None:
+        rating = result[0][0]
+    else:
+        rating = "No reviews yet!"
+    return render(request, 'booksForSale.html', {'book': book, 'instances': instancesForTrade, 'rating': rating})
+
 
 def addBookToCollection(request):
     pass
