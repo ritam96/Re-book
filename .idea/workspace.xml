@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46032e85-3c19-43b9-98e7-6fd2572a775e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_book/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_book/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_book/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_book/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rebook/static/styles/layoutStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/static/styles/layoutStyles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rebook/templates/browse.html" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/templates/browse.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rebook/templates/filteredBooks.html" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/templates/filteredBooks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rebook/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rebook/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rebook/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +18,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/re_book/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="630">
               <caret line="46" selection-start-line="45" selection-end-line="46" />
             </state>
           </provider>
@@ -40,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rebook/templates/layout.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-818">
-              <caret line="47" column="66" lean-forward="true" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
+            <state relative-caret-position="705">
+              <caret line="47" column="66" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -49,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rebook/templates/filteredBooks.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+            <state relative-caret-position="225">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -58,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rebook/templates/browse.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="32" column="39" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="32" selection-end-column="39" />
+            <state relative-caret-position="480">
+              <caret line="32" column="39" selection-start-line="24" selection-start-column="28" selection-end-line="32" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -67,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rebook/templates/collection.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="28" column="35" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="28" selection-end-column="35" />
+            <state relative-caret-position="420">
+              <caret line="28" column="35" selection-start-line="21" selection-start-column="24" selection-end-line="28" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -122,7 +114,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -169,6 +160,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -265,6 +257,7 @@
       <workItem from="1554367429454" duration="5435000" />
       <workItem from="1554566823325" duration="609000" />
       <workItem from="1554684708908" duration="4532000" />
+      <workItem from="1554713726033" duration="73000" />
     </task>
     <servers />
   </component>
@@ -274,18 +267,18 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25693000" />
+    <option name="totallyTimeSpent" value="25766000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1299" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1859537" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18914606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3272727" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32561985" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -401,18 +394,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/re_book/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/rebook/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/re_book/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="46" selection-start-line="45" selection-end-line="46" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rebook/static/styles/layoutStyles.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -421,16 +404,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rebook/templates/filteredBooksCollection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/rebook/templates/filteredBooksCollection.html" />
     <entry file="file://$PROJECT_DIR$/rebook/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
@@ -441,31 +415,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rebook/templates/layout.html">
+    <entry file="file://$PROJECT_DIR$/re_book/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-818">
-          <caret line="47" column="66" lean-forward="true" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
+        <state relative-caret-position="630">
+          <caret line="46" selection-start-line="45" selection-end-line="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rebook/templates/collection.html">
+    <entry file="file://$PROJECT_DIR$/re_book/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rebook/templates/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="28" column="35" lean-forward="true" selection-start-line="21" selection-start-column="24" selection-end-line="28" selection-end-column="35" />
+        <state relative-caret-position="705">
+          <caret line="47" column="66" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rebook/templates/browse.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="32" column="39" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="32" selection-end-column="39" />
+        <state relative-caret-position="480">
+          <caret line="32" column="39" selection-start-line="24" selection-start-column="28" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rebook/templates/collection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="35" selection-start-line="21" selection-start-column="24" selection-end-line="28" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rebook/templates/filteredBooks.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="225">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>
