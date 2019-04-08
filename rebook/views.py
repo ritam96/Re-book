@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect 
 from django.contrib.auth import authenticate, login as log, logout as outlog
 from datetime import datetime
-from rebook.models import User, Book, BookInstance, Trade, Proposal, TradeState, BookGoals
+from rebook.models import *
 from django.core import serializers
 from django.db import connection
 from django.template.defaulttags import register
@@ -47,14 +47,6 @@ def browse(request):
             bookRatingsDict[book] = []
 
     return render(request, 'browse.html', {'queryset': queryset, 'bookRatingsDict': bookRatingsDict})
-
-
-def login(request):
-    return render(request, 'login.html', {'registering': False})
-
-
-def register(request):
-    return render(request, 'login.html', {'registering': True})
 
 
 def loginWithCredentials(request):
@@ -203,7 +195,27 @@ def booksForTrade(request, isbn):
 
 
 def addBookToCollection(request):
-    pass
+
+    book = Book.objects.get(ISBN=request.POST['ISBN'])
+    bookInstance = BookInstance(User=request.user, ISBN=book)
+    if 'readingState' in request.POST.keys() and request.POST['readingState'] != '':
+        bookInstance.readingState = request.POST['readingState']
+    if 'bookGoals' in request.POST.keys() and request.POST['bookGoals'] != '':
+        bookGoals = BookGoals.objects.get(id=int(request.POST['bookGoals']))
+        bookInstance.goal = bookGoals
+    if 'bookState' in request.POST.keys() and request.POST['bookState'] != '':
+        bookState = BookState.objects.get(id=int(request.POST['bookState']))
+        bookInstance.state = bookState
+    if 'bookRating' in request.POST.keys() and request.POST['bookRating'] != '':
+        bookRating = Ratings.objects.get(numberStars=int(request.POST['bookRating']))
+        bookInstance.rating = bookRating
+
+    if 'price' in request.POST.keys() and request.POST['price'] != '':
+        bookInstance.price = float(request.POST['price'])
+
+    bookInstance.save()
+
+    return redirect('collection')
 
 
 def editProfile(request):
@@ -226,7 +238,10 @@ def edit(request):
         user.set_password(request.POST['password'])
         log(request, user)
     if 'photo' in request.POST.keys() and request.POST['photo'] in request.FILES:
-        user.photo = request.POST['photo']
+        myfile = request.FILES['photo']
+        fs = FileSystemStorage('media/photos')
+        filename = fs.save(myfile.name, user.username)
+        user.photo = fs.url(filename)
     user.save()
     return redirect('account')
 
@@ -318,3 +333,27 @@ def searchCollection(request):
     #return render(request, 'collection.html')
 
     pass
+
+def sell(request, isbn, username):
+    print(isbn)
+    user = User.objects.get(username=username)
+    b = Book.objects.get(ISBN=isbn)
+    book = BookInstance.objects.get(ISBN=b, User=user.id)
+
+    purchase = Purchases(bookInstance = book, buyer = request.user)
+    purchase.save()
+    return redirect('collection')
+
+def listPurchases(request):
+    user = User.objects.get(username=request.user)
+    my_purchases = Purchases.objects.filter(buyer=user.id)
+    return render(request, 'purchases.html', { 'my_purchases': my_purchases })
+
+def sold(request):
+    b = BookInstance.objects.filter(User=request.user)
+    my_purchases = []
+    for book in b:
+        if len(Purchases.objects.filter(bookInstance=book)) != 0:
+            my_purchases.append(Purchases.objects.get(bookInstance=book))
+    return render(request, 'sold.html', {'my_purchases': my_purchases})
+    

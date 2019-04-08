@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% load custom_tags %}
+
+{% block main %}
+    <ul class="row nav nav-tabs justify-content-center">
+        <li><a href="/proposals" id="toggle-proposals">Proposals</a></li>
+        <li><a href="/offers" id="toggle-offers">Offers</a></li>
+        <li><a href="/trades" id="toggle-trades">Trades</a></li>
+        <li><a href="/purchases" id="toggle-offers">Purchases</a></li>
+        <li><a href="/sold" class="active" id="toggle-offers">Sold</a></li>
+    </ul>
+    <div class="">
+        {% for purchase in my_purchases %}
+        <div class="row bookListItem">
+            <div class="col-2 bookDetails my-auto">
+                <p class="proposalMaker">Buyer: {{purchase.buyer.username}}</p>
+                <p class="proposalMaker">Address: {{purchase.buyer.address}}</p>
+            </div>
+            <div class="col-2">
+                <img src="{{ purchase.bookInstance.ISBN.cover.url }}" class="cover" id="bookCover"/>
+            </div>
+            <div class="col-4 bookDetails">
+                <p class="bookTitle">{{ purchase.bookInstance.ISBN.title }}</p>
+                    {% for author in purchase.bookInstance.ISBN.author.all %}
+                        <span class="authorName">{{ author.name }}</span>
+                    {% endfor %}
+            </div>
+    
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

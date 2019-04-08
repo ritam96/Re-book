@@ -10,9 +10,12 @@
                 <p><strong>Email: </strong> {{ user.email }}</p>
             </div>
             <div class="col-lg-4">
+                    {% if user.photo != "" %}
                 <figure>
-                    <img src="{{ user.photo }}" alt="" >
+                    
+                    <img src="{{ user.photo.url }}" alt="" >
                 </figure>
+                {% endif %}
             </div>
         </div>
         <div class="row" >

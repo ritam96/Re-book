@@ -10,8 +10,8 @@
                     <div class="col-2">
                         <img src="{{ book.cover.url }}" class="cover"/>
                     </div>
-                    <div class="col bookDetails">
-                        <p class="bookTitle" >{{ book.title }}</p>
+                    <div class="col-4" style="text-align:left">
+                        <p class="bookTitle" >{{ book.tittle }}</p>
 
                         {% for author in book.author.all %}
                             <span class="authorName">{{ author.name }}</span>
@@ -22,7 +22,7 @@
                         <span> {{ rating }}</span>
 
                     </div>
-                    <div class="col bookDetails">
+                    <div class="col-4"style="text-align:left">
                         <br />
                         <br />
                         <span>Book state:&nbsp;</span>
@@ -30,7 +30,14 @@
                         <br />
                         <span>Book owner:&nbsp;</span>
                         <span> {{ instance.User.username }}</span>
+                        <br />
+                        <span>Book price:&nbsp;</span>
+                        <span> {{ instance.price }}</span>
+                        <span>€</span>
 
+                    </div>
+                    <div class="col-2">
+                            <button style="margin:30px" class="btn btn-dark actionButton" type="submit"> <a style="text-decoration: none" id="edit" href="{% url 'buyBook' book.ISBN instance.User.username %}">Buy</a></button>
                     </div>
                 </div>
             {% endfor %}

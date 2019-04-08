@@ -119,6 +119,10 @@ body{
     border-color: black
 }
 
+.registerButton {
+    padding-top: 2vh !important;
+}
+
 .form-actions {
     margin: 0;
     background-color: transparent;
@@ -176,5 +180,11 @@ body{
 
 #edit:hover, #edit:active {
     color: #FFF698 !important
+}
+
+
+.registerLink:hover {
+    text-decoration: underline !important; 
+    cursor: pointer
 }
 
