@@ -339,7 +339,6 @@ def searchCollection(request):
     books = list(itertools.chain(books_tittle, books_author, books_publisher))
 
 
-<<<<<<< HEAD
     user = User.objects.get(username=request.user.username)
     listBookInstance = BookInstance.objects.filter(User=user)
 
@@ -381,7 +380,6 @@ def searchCollection(request):
     print(bookRatingsDict)
     return render(request, 'collection.html', {'books': bookRatingsDict})
 
-=======
     pass
 
 def sell(request, isbn, username):
@@ -407,4 +405,3 @@ def sold(request):
             my_purchases.append(Purchases.objects.get(bookInstance=book))
     return render(request, 'sold.html', {'my_purchases': my_purchases})
     
->>>>>>> 7f688e64ced0bc3df2471fa2c9e6274365b4fd67
