@@ -42,8 +42,8 @@
 
             {% if not request.user.is_anonymous %}
             <div class="bookOptionsButtons">
-                <button type="button" class="btn btn-dark actionButton">Buy this book</button>
-                <button type="button" class="btn btn-dark actionButton">Search for trade</button>
+                <button class="btn btn-dark actionButton" type="submit"> <a style="text-decoration: none" id="edit" href="{% url 'booksForSale' book.ISBN %}">Buy this book</a></button>
+                <button type="submit" class="btn btn-dark actionButton"><a style="text-decoration: none" id="edit" href="{% url 'booksForTrade' book.ISBN %}">Search for trade</a></button>
             </div> 
             {% endif %}
 
@@ -66,17 +66,42 @@
                 </div>
                     <div class="modal-body">
                         <form action="/addBookToCollection" method="POST">{% csrf_token %}
+                            <input name="ISBN" class="form-control" value="{{ book.ISBN }}" type="hidden">
                             <label class="loginLabels">How much have you read:</label>
                             <br />
                             <input name="readingState" class="form-control">
                             <br />
+                            <br />
+
                             <label class="loginLabels">What do you want to do with this book:</label>
                             <br/>
-                            <label class="radio-inline"><input type="radio" name="sell">Sell</label>
-                            <label class="radio-inline"><input type="radio" name="buy">Buy</label>
-                            <label class="radio-inline"><input type="radio" name="keep" checked>Keep</label>
-                            <label class="radio-inline"><input type="radio" name="trade">Trade</label>
+                            <label class="radio-inline"><input type="radio" id="sell" onclick="show()" value="1" name="bookGoals"> Sell</label>
+                            <label class="radio-inline"><input type="radio" value="2" onclick="show()" name="bookGoals"> Buy</label>
+                            <label class="radio-inline"><input type="radio" value="3" onclick="show()" name="bookGoals" checked> Keep</label>
+                            <label class="radio-inline"><input type="radio" value="4" onclick="show()" name="bookGoals"> Trade</label>
+                            <div id="selling" style="display: none">
+                                    <label class="loginLabels">Selling price: </label>
+                                    <input name="price" class="form-control">
+                            </div>
+                            
+
                             <br />
+                            <br />
+
+                            <label class="loginLabels">In which condition is your book:</label>
+                            <br />
+
+                            <label class="radio-inline"><input type="radio" value="1" name="bookState" checked> New</label>
+                            <label class="radio-inline"><input type="radio" value="2" name="bookState"> Slightly Used</label>
+                            <label class="radio-inline"><input type="radio" value="3" name="bookState"> Heavily Used</label>
+                            <br/>
+                            <br />
+
+                            <label class="loginLabels">Book Rating:</label>
+                            <input name="bookRating" class="form-control">
+                            <br />
+                            <br />
+
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-dark btn-outline-dark">Confirm</button>
                             </div>

@@ -49,14 +49,6 @@ def browse(request):
     return render(request, 'browse.html', {'queryset': queryset, 'bookRatingsDict': bookRatingsDict})
 
 
-def login(request):
-    return render(request, 'login.html', {'registering': False})
-
-
-def register(request):
-    return render(request, 'login.html', {'registering': True})
-
-
 def loginWithCredentials(request):
     user = authenticate(username=request.POST['username'], password=request.POST['password'])
     if user is not None:
@@ -165,8 +157,65 @@ def bookDetails(request):
 
     return render(request, 'bookDetails.html', {'book': book, 'rating': rating})
 
+
+def booksForSale(request, isbn):
+    book = Book.objects.get(ISBN=isbn)
+    instancesForSale = BookInstance.objects.raw('''SELECT * FROM rebook_bookinstance
+    WHERE goal_id=1 AND ISBN_id='''+str(isbn))
+    rating = None
+
+    # Calculate average rating
+    cursor = connection.cursor()
+    cursor.execute(
+        "SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
+    result = cursor.fetchall()
+    if result[0][0] != None:
+        rating = result[0][0]
+    else:
+        rating = "No reviews yet!"
+    return render(request, 'booksForSale.html', {'book': book, 'instances': instancesForSale, 'rating': rating})
+
+
+def booksForTrade(request, isbn):
+    book = Book.objects.get(ISBN=isbn)
+    instancesForTrade = BookInstance.objects.raw('''SELECT * FROM rebook_bookinstance
+    WHERE goal_id=4 AND ISBN_id='''+str(isbn))
+    rating = None
+
+    # Calculate average rating
+    cursor = connection.cursor()
+    cursor.execute(
+        "SELECT AVG(rating_id) as Average FROM (SELECT * FROM rebook_bookinstance WHERE ISBN_id=" + book.ISBN + ")")
+    result = cursor.fetchall()
+    if result[0][0] != None:
+        rating = result[0][0]
+    else:
+        rating = "No reviews yet!"
+    return render(request, 'booksForSale.html', {'book': book, 'instances': instancesForTrade, 'rating': rating})
+
+
 def addBookToCollection(request):
-    pass
+
+    book = Book.objects.get(ISBN=request.POST['ISBN'])
+    bookInstance = BookInstance(User=request.user, ISBN=book)
+    if 'readingState' in request.POST.keys() and request.POST['readingState'] != '':
+        bookInstance.readingState = request.POST['readingState']
+    if 'bookGoals' in request.POST.keys() and request.POST['bookGoals'] != '':
+        bookGoals = BookGoals.objects.get(id=int(request.POST['bookGoals']))
+        bookInstance.goal = bookGoals
+    if 'bookState' in request.POST.keys() and request.POST['bookState'] != '':
+        bookState = BookState.objects.get(id=int(request.POST['bookState']))
+        bookInstance.state = bookState
+    if 'bookRating' in request.POST.keys() and request.POST['bookRating'] != '':
+        bookRating = Ratings.objects.get(numberStars=int(request.POST['bookRating']))
+        bookInstance.rating = bookRating
+
+    if 'price' in request.POST.keys() and request.POST['price'] != '':
+        bookInstance.price = float(request.POST['price'])
+
+    bookInstance.save()
+
+    return redirect('collection')
 
 
 def editProfile(request):
@@ -189,7 +238,10 @@ def edit(request):
         user.set_password(request.POST['password'])
         log(request, user)
     if 'photo' in request.POST.keys() and request.POST['photo'] in request.FILES:
-        user.photo = request.POST['photo']
+        myfile = request.FILES['photo']
+        fs = FileSystemStorage('media/photos')
+        filename = fs.save(myfile.name, user.username)
+        user.photo = fs.url(filename)
     user.save()
     return redirect('account')
 
@@ -287,6 +339,7 @@ def searchCollection(request):
     books = list(itertools.chain(books_tittle, books_author, books_publisher))
 
 
+<<<<<<< HEAD
     user = User.objects.get(username=request.user.username)
     listBookInstance = BookInstance.objects.filter(User=user)
 
@@ -328,3 +381,30 @@ def searchCollection(request):
     print(bookRatingsDict)
     return render(request, 'collection.html', {'books': bookRatingsDict})
 
+=======
+    pass
+
+def sell(request, isbn, username):
+    print(isbn)
+    user = User.objects.get(username=username)
+    b = Book.objects.get(ISBN=isbn)
+    book = BookInstance.objects.get(ISBN=b, User=user.id)
+
+    purchase = Purchases(bookInstance = book, buyer = request.user)
+    purchase.save()
+    return redirect('collection')
+
+def listPurchases(request):
+    user = User.objects.get(username=request.user)
+    my_purchases = Purchases.objects.filter(buyer=user.id)
+    return render(request, 'purchases.html', { 'my_purchases': my_purchases })
+
+def sold(request):
+    b = BookInstance.objects.filter(User=request.user)
+    my_purchases = []
+    for book in b:
+        if len(Purchases.objects.filter(bookInstance=book)) != 0:
+            my_purchases.append(Purchases.objects.get(bookInstance=book))
+    return render(request, 'sold.html', {'my_purchases': my_purchases})
+    
+>>>>>>> 7f688e64ced0bc3df2471fa2c9e6274365b4fd67

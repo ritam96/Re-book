@@ -86,16 +86,85 @@
                     <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search Books</button>
                 </form>
-                <div class="navbar-nav ml-5" data-toggle="modal" data-target="#loginModal">
-                    <a id="login" class="nav-item nav-link" href="/login">Login</a>
+                <div class="navbar-nav ml-5">
+                    <a id="login" class="nav-item nav-link" data-toggle="modal" data-target="#loginModal">Login</a>
                 </div>
             </div>
             
         </nav>
 
-         <div id="content">
-            {% block content %}{% endblock %}
+        <div  class="modal" id="loginModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h3 class="modal-title">Login to Re-book</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        <form action="/loginWithCredentials" method="POST">{% csrf_token %}
+                            <label class="loginLabels">Username:</label>
+                            <br />
+                            <input name="username" class="form-control">
+                            <br />
+                            <label class="loginLabels">Password:</label>
+                            <br/>
+                            <input name="password" type="password" class="form-control">
+                            <br />
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-dark btn-outline-dark">Login</button>
+                            </div>
+                        </form>
+                        <br />
+                        <a class="registerLink" onclick="$(function(){ $('#loginModal').modal('toggle')})" data-toggle="modal" data-target="#registerModal">Don't have an account? Register here</a>
+                    </div>
+                </div>
+            </div>
         </div>
+    
+    
+        <div  class="modal" id="registerModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Register to Re-book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/createAccount" method="POST">{% csrf_token %}
+                            <label class="loginLabels">Username:</label>
+                            <br />
+                            <input name="username" class="form-control">
+                            <br />
+                            <label class="loginLabels">Email:</label>
+                            <br />
+                            <input name="email" type="email" class="form-control">
+                            <br />
+                            <label class="loginLabels">Address:</label>
+                            <br />
+                            <input name="address" class="form-control">
+                            <br />
+                            <label class="loginLabels">Password:</label>
+                            <br/>
+                            <input name="password" type="password" class="form-control">
+                            <br />
+                            <label class="loginLabels">Photo:</label>
+                            <br/>
+                            <input name="photo" type="file" class="">
+                            <br />
+                            <div class="form-actions">
+                                <br />
+                                <button type="submit" class="btn btn-dark btn-outline-dark">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    
 
         {% endif %}
         

@@ -23,9 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', views.logout),
     path('', views.browse, name='rebook'),
-    path('login/', views.login),
     path('loginWithCredentials', views.loginWithCredentials),
-    path('register', views.register),
     path('createAccount', views.createAccount),
     path('browse/', views.browse),
     path('proposals', views.proposals, name='proposals'),
@@ -43,7 +41,12 @@ urlpatterns = [
     path('edit/', views.edit),
     path('search/', views.search),
     path('deleteUser/', views.deleteUser),
-    path('collection/', views.collection),
+    path('booksForSale/<str:isbn>', views.booksForSale, name='booksForSale'),
+    path('booksForTrade/<str:isbn>', views.booksForTrade, name='booksForTrade'),
+    path('collection/', views.collection, name='collection'),
     path('searchCollection/', views.searchCollection),
+    path('buyBook/<str:isbn>/<str:username>', views.sell, name='buyBook'),
+    path('purchases', views.listPurchases),
+    path('sold', views.sold),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -7,7 +7,7 @@ fs = FileSystemStorage(location='/media/covers')
 
 class User(AbstractUser):
     address = models.CharField(max_length=200)
-    photo = models.ImageField()
+    photo = models.ImageField(storage=fs)
     hasNotifications = models.BooleanField(default=False)
 
 
@@ -46,6 +46,7 @@ class BookInstance(models.Model):
     readingState = models.DecimalField(max_digits=4, decimal_places=3)
     goal = models.ForeignKey(BookGoals, on_delete=models.PROTECT)
     rating = models.ForeignKey(Ratings, on_delete=models.PROTECT, default=None, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
 class TradeState(models.Model):
     state = models.CharField(max_length=20)
@@ -62,3 +63,9 @@ class Trade(models.Model):
     proposalID = models.OneToOneField(Proposal, on_delete=models.CASCADE)
     bookInstance2 = models.ForeignKey(BookInstance, on_delete=models.CASCADE)
     state = models.ForeignKey(TradeState, on_delete=models.PROTECT)
+
+
+class Purchases(models.Model):
+    bookInstance = models.OneToOneField(BookInstance, on_delete=models.PROTECT)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    IBAN = models.CharField(max_length=50)
