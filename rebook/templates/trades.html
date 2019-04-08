@@ -22,27 +22,29 @@
     <div class="">
         <h3>Pending</h3>
         {% for trade in trades %}
+        <div class='container-fluid'>
         <div class="row bookListItemNoBorder">
-            <div class="col-1 bookDetails my-auto">
+            
+            <div class="col-1 bookDetails my-auto " style="margin:0">
                 <p>From: {{trade.proposalID.bookInstance.User.username}}</p>
             </div>
-            <div class="col-2">
+            <div class="col-1" style="margin:0">
                 <img src="{{ trade.proposalID.bookInstance.ISBN.cover.url }}" class="cover" id="bookCover"/>
             </div>
-            <div class="col-3 bookDetails">
+            <div class="col-3 bookDetails" style="margin:0">
                 <p class="bookTitle">{{ trade.proposalID.bookInstance.ISBN.title }}</p>
                     {% for author in trade.proposalID.bookInstance.ISBN.author.all %}
                         <span class="authorName">{{ author.name }}</span>
                     {% endfor %}
             </div>
 
-            <div class="col-1 bookDetails my-auto">
+            <div class="col-1 bookDetails my-auto" style="margin:0">
                 <p>From: {{trade.bookInstance2.User.username}}</p>
             </div>
-            <div class="col-2">
+            <div class="col-1" style="margin:0">
                 <img src="{{ trade.bookInstance2.ISBN.cover.url }}" class="cover" id="bookCover"/>
             </div>
-            <div class="col-3 bookDetails">
+            <div class="col-3 bookDetails" style="margin:0">
                 <p class="bookTitle">{{ trade.bookInstance2.ISBN.title }}</p>
                     {% for author in trade.bookInstance2.ISBN.author.all %}
                         <span class="authorName">{{ author.name }}</span>
@@ -50,6 +52,7 @@
             </div>
                 
         </div>
+    </div>
 
         <div class="row bookListItemButtons justify-content-end">
             <form action="confirmTrade/" method="POST" style="margin-right: 3vw">{% csrf_token %}
